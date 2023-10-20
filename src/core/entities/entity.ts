@@ -5,9 +5,9 @@ export abstract class Entity<Props> {
     private _id: Id;
     protected props: Props
 
-    constructor(props: Props, id?: string) {
+    constructor(props: Props, id?: Id) {
         this.props = props
-        this._id = new Id(id)
+        this._id = id ?? new Id(id)
     }
 
     get id() {
