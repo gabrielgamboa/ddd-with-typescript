@@ -1,6 +1,6 @@
-import { Id } from "../../core/value-objects/id";
-import { Answer } from "../entities/answer";
-import { AnswersRepository } from "../repositories/answers-repository";
+import { Id } from "@/core/value-objects/id";
+import { Answer } from "../../domain/entities/answer";
+import { AnswersRepository } from "../../domain/repositories/answers-repository";
 
 interface AnswerQuestionUseCaseRequest {
   instructorId: string;
