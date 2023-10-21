@@ -1,24 +1,24 @@
-import { QuestionsRepository } from "@/domain/forum/domain/repositories/questions-repository";
-import { Question } from "../../domain/entities/question";
 import { CreateQuestionUseCase } from "./create-question";
+import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questions-repository";
 
-class QuestionRepositoryStub implements QuestionsRepository {
-  async create(question: Question): Promise<void> {
-    console.log(question);
-  }
-}
+let questionsRepository: InMemoryQuestionsRepository;
+let sut: CreateQuestionUseCase;
 
-test("Create an question", async () => {
-  const questionRepositoryStub = new QuestionRepositoryStub();
-  const questionQuestion = new CreateQuestionUseCase(questionRepositoryStub);
-
-  const { question } = await questionQuestion.execute({
-    content: "New question",
-    title: "Question",
-    authorId: "1",
+describe("Create Question", () => {
+  beforeEach(() => {
+    questionsRepository = new InMemoryQuestionsRepository();
+    sut = new CreateQuestionUseCase(questionsRepository);
   });
 
-  expect(question.id).toBeTruthy();
-  expect(question.content).toEqual("New question");
-  expect(question.slug.value).toEqual("question");
+  it("should be able to create a question", async () => {
+    const { question } = await sut.execute({
+      content: "New question",
+      title: "Question",
+      authorId: "1",
+    });
+
+    expect(question.id).toBeTruthy();
+    expect(question.content).toEqual("New question");
+    expect(question.slug.value).toEqual("question");
+  });
 });
