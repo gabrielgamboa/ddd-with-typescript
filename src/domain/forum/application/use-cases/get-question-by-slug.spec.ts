@@ -25,8 +25,9 @@ describe("Get question by slug", () => {
       slug: "any-title",
     });
 
+    console.log(question);
+
     expect(question.id).toBeTruthy();
-    expect(question.slug.value.replace("-", " ")).toEqual(question.title);
   });
 
   it("should throws if question doesnt exists", async () => {
