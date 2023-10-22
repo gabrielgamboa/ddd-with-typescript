@@ -3,6 +3,7 @@ import { GetQuestionBySlugUseCase } from "./get-question-by-slug";
 import { Question } from "../../domain/entities/question";
 import { Id } from "@/core/value-objects/id";
 import { Slug } from "../../domain/entities/value-objects/slug";
+import { makeQuestion } from "test/factories/make-question";
 
 let questionsRepository: InMemoryQuestionsRepository;
 let sut: GetQuestionBySlugUseCase;
@@ -15,10 +16,7 @@ describe("Get question by slug", () => {
 
   it("should be able get question by slug", async () => {
     questionsRepository.create(
-      Question.create({
-        authorId: new Id("1"),
-        content: "any content",
-        title: "any title",
+      makeQuestion({
         slug: new Slug("any-title"),
       }),
     );
