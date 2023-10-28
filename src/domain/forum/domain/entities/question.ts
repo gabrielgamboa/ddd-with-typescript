@@ -55,17 +55,19 @@ export class Question extends Entity<QuestionProps> {
     this.props.updatedAt = new Date();
   }
 
-  set bestAnswerId(bestAnswerId: Id | undefined) {
+  changeBestAnswerId(bestAnswerId: Id | undefined) {
     this.props.bestAnswerId = bestAnswerId;
     this.touch();
   }
 
-  set content(content: string) {
+  changeContent(content: string) {
+    if (!content) throw new Error("content not provided");
     this.props.content = content;
     this.touch();
   }
 
-  set title(title: string) {
+  changeTitle(title: string) {
+    if (!title) throw new Error("title not provided");
     this.props.title = title;
     this.props.slug = Slug.createFromText(title);
     this.touch();
