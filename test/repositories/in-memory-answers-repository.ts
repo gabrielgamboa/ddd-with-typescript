@@ -5,10 +5,8 @@ import { AnswersRepository } from "@/domain/forum/domain/repositories/answers-re
 export class InMemoryAnswersRepository implements AnswersRepository {
   answers: Answer[] = [];
 
-  async findById(id: Id): Promise<Answer | null> {
-    const answer = this.answers.find(
-      (answer) => answer.id.toValue() === id.toValue(),
-    );
+  async findById(id: string): Promise<Answer | null> {
+    const answer = this.answers.find((answer) => answer.id.toValue() === id);
 
     if (!answer) return null;
 

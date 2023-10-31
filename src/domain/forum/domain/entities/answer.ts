@@ -41,6 +41,7 @@ export class Answer extends Entity<AnswerProps> {
 
   set content(content: string) {
     this.props.content = content;
+    this.touch();
   }
 
   static create(props: Optional<AnswerProps, "createdAt">, id?: Id) {
