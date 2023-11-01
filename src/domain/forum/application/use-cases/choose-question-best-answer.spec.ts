@@ -35,4 +35,21 @@ describe("Choose Question Best Answer", () => {
 
     expect(updatedQuestion).toBeDefined();
   });
+
+  it("should throw if authorId is not equal to the authorId from question", async () => {
+    const question = makeQuestion();
+    const answer = makeAnswer({
+      questionId: question.id,
+    });
+
+    await questionsRepository.create(question);
+    await answersRepository.create(answer);
+
+    expect(async () => {
+      await sut.execute({
+        authorId: "author-id-1",
+        answerId: answer.id.toString(),
+      });
+    }).rejects.toThrow("Not allowed");
+  });
 });
